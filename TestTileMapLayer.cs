@@ -7,11 +7,13 @@ public partial class TestTileMapLayer : Node2D
 	// Hardcoded for now, there may or may not be a way to automatically derive this from the TileMapLayer props
 	private static int tileSideLength = 32;
 	private Sprite2D cursorSprite;
+	private TileMapLayer baseTileMap;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		cursorSprite = GetNode<Sprite2D>("CursorSprite");
+		baseTileMap = GetNode<TileMapLayer>("BaseTileMap");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,6 +45,8 @@ public partial class TestTileMapLayer : Node2D
 			var tileCoords = MousePositionToTilePosition(eventMouseButton);
 			GD.Print("Tile coordinate is: ", tileCoords);
 			cursorSprite.Position = TilePositionToPixelPosition(tileCoords);
+			var tileData = baseTileMap.GetCellTileData(tileCoords);
+			GD.Print("Tile Walkable: ", tileData.GetCustomData("Walkable"));
 		}
 	}
 }

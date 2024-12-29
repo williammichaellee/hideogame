@@ -23,6 +23,7 @@ texture = ExtResource("1_ucl8k")
 15:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
+1:1/0/custom_data_0 = true
 2:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0
@@ -1759,6 +1760,8 @@ texture = ExtResource("3_hcfe4")
 15:10/0 = 0
 
 [resource]
+custom_data_layer_0/name = "Walkable"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_b0hjg")
 sources/1 = SubResource("TileSetAtlasSource_0eho3")
 sources/2 = SubResource("TileSetAtlasSource_0bdbi")
