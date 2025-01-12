@@ -1,5 +1,6 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://wqerc5nuvpyy"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://wqerc5nuvpyy"]
 
+[ext_resource type="Script" path="res://Grass.cs" id="1_jk5a7"]
 [ext_resource type="Texture2D" uid="uid://b047kjfye0bs0" path="res://HAS Overworld 2.1/GrassBiome/GB-LandTileset.png" id="1_ucl8k"]
 [ext_resource type="Texture2D" uid="uid://cdumd1e7m47i1" path="res://HAS Overworld 2.1/Universal/Universal-Trees-And-Mountains.png" id="2_j0irm"]
 [ext_resource type="Texture2D" uid="uid://bcked0oxtil5n" path="res://HAS Overworld 2.1/Universal/Universal-Road-Tileset.png" id="3_hcfe4"]
@@ -236,6 +237,7 @@ texture = ExtResource("1_ucl8k")
 1:15/0 = 0
 2:15/0 = 0
 3:15/0 = 0
+3:15/0/custom_data_0 = true
 4:15/0 = 0
 5:15/0 = 0
 6:15/0 = 0
@@ -1759,6 +1761,11 @@ texture = ExtResource("3_hcfe4")
 15:10/0 = 0
 
 [resource]
+custom_data_layer_0/name = "walkable"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_b0hjg")
 sources/1 = SubResource("TileSetAtlasSource_0eho3")
 sources/2 = SubResource("TileSetAtlasSource_0bdbi")
+script = ExtResource("1_jk5a7")
+Size = Vector2(20, 20)
+CellSize = Vector2(32, 32)
