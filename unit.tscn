@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://brrnn1holu3kg"]
+[gd_scene load_steps=8 format=3 uid="uid://brrnn1holu3kg"]
 
 [ext_resource type="Texture2D" uid="uid://7e18jv8f4y0r" path="res://Units/unit_shadow.svg" id="1_5diom"]
+[ext_resource type="Script" path="res://Unit.cs" id="1_fagbv"]
 [ext_resource type="Texture2D" uid="uid://dmyoieiq2b85d" path="res://HAS_Creatures/great elf/dwarf/sprite_sheet_dwarf_0_16x16.png" id="3_7rtpx"]
 
 [sub_resource type="Animation" id="Animation_jt5y5"]
@@ -59,7 +60,12 @@ _data = {
 "selected": SubResource("Animation_flrbn")
 }
 
-[node name="Unit" type="Path2D"]
+[node name="Unit" type="Path2D" node_paths=PackedStringArray("_sprite", "_animPlayer", "_pathFollow")]
+scale = Vector2(2, 2)
+script = ExtResource("1_fagbv")
+_sprite = NodePath("PathFollow2D/Sprite")
+_animPlayer = NodePath("AnimationPlayer")
+_pathFollow = NodePath("PathFollow2D")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false

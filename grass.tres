@@ -24,6 +24,7 @@ texture = ExtResource("1_ucl8k")
 15:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
+1:1/0/custom_data_0 = true
 2:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0

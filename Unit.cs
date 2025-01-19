@@ -26,6 +26,9 @@ public partial class Unit : Path2D
     [Export] public Vector2 SkinOffset { get => _skinOffset; set => SetSkinOffset(value); }
     // Unit's move speed in pixels
     [Export] public float MoveSpeed { get; set; } = 600.0f;
+    [Export] private Sprite2D _sprite;
+    [Export] private AnimationPlayer _animPlayer;
+    [Export] private PathFollow2D _pathFollow;
 
     // Coordinates of the grid's cell the unit is on.
     private Vector2 _cell = Vector2.Zero;
@@ -55,21 +58,13 @@ public partial class Unit : Path2D
     private Texture _skin;
     private Vector2 _skinOffset = Vector2.Zero;
 
-    private Sprite2D _sprite;
-    private AnimationPlayer _animPlayer;
-    private PathFollow2D _pathFollow;
-
     public override void _Ready()
     // Use the 'process' callback to move the unit along a path
     // Unless it has a path to walk, don't update it every frame
-    // See walk_along
+    // See WalkAlong
     {
         // Stops Node from processing
         SetProcess(false);
-
-        _sprite = GetNode<Sprite2D>("PathFollow2D/Sprite");
-        _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _pathFollow = GetNode<PathFollow2D>("PathFollow2D");
 
         // Initializes the 'cell' property and snap the unit to the cell's center on the map
         Cell = Grid.CalculateGridCoordinates(Position);
@@ -81,7 +76,7 @@ public partial class Unit : Path2D
             // Creating it in editor prevents us from moving unit
             Curve = new Curve2D();
         }
-
+        // Temp instructions for moving the unit
         Vector2[] _points = {
 		new Vector2(2, 2),
 		new Vector2(2, 5),
@@ -91,20 +86,34 @@ public partial class Unit : Path2D
         WalkAlong(_points);
     }
 
+    // When 'active,' moves the unit along its 'curve' with the help of the PathFollow2D node
     public override void _Process(double delta)
     {
+        // Every frame, the 'PathFollow2D.offset' property moves the sprites along the 'curve'
+        // It moves an exact number of pixels, taking turns into account
         _pathFollow.Progress += MoveSpeed * (float)delta;
 
+        // When we increase the 'offset' above, the 'ProgressRatio' also updates
+        // This represents how far you are along the curve in percent
+        // Unit stops moving when it reaches end (ProgressRatio equals '1.0')
         if (_pathFollow.ProgressRatio >= 1.0f)
         {
+            // Setting IsWalking to false also turns off processing
             IsWalking = false;
+            // Reset Progress to 0.0 which snaps the sprites back to the Unit node's position
+            // Position the node to the center of the target grid cell and clear the curve
+            // In the process loop, we only move the sprite but not the unit
+            // The following lines move the unit in a way that's transparent to the player
             _pathFollow.Progress = 0.0f;
             Position = ((dynamic)Grid).CalculateMapPosition(Cell);
             Curve.ClearPoints();
+            // Emit a signal used by the game board
             EmitSignal(nameof(WalkFinished));
         }
     }
 
+    // Starts walking along the 'path'
+    // 'path' is an array of grid coordinates that the function converts to map coordinates
     public void WalkAlong(Vector2[] path)
     {
         if (path.Length == 0)
@@ -112,20 +121,29 @@ public partial class Unit : Path2D
             return;
         }
 
+        // Converts the 'path' to points on the 'curve'
+        // Property comes from the Path2D class the Unit extends
         Curve.AddPoint(Vector2.Zero);
         foreach (Vector2 point in path)
         {
             Curve.AddPoint(((dynamic)Grid).CalculateMapPosition(point) - Position);
         }
+        // Instantly change the unit's cell to the target position
+        // We have the coordinates provided by the 'path' argument
+        // The cell itself represents the grid coordinates the unit will stand on
         Cell = path[path.Length - 1];
+        // The 'IsWalking' property triggers the move animation and turns on '_Process;'
+        // See SetIsWalking below
         IsWalking = true;
     }
 
+    // When changing the cell's value, we don't want coords out of the grid, so we clamp them
     private void SetCell(Vector2 value)
     {
         _cell = ((dynamic)Grid).Clamp(value);
     }
 
+    // The _isSelected property toggles playback of the "selected" animation
     private void SetIsSelected(bool value)
     {
         _isSelected = value;
@@ -139,11 +157,17 @@ public partial class Unit : Path2D
         }
     }
 
+    // Both setters below manipulate the unit's Sprite node
+    // Here, we update the sprite's texture:
     private void SetSkin(Texture value)
     {
         _skin = value;
+        // Setter functions are called during the node's _Init() callback before they entered the tree
+        // At that time, the _sprite variable is null
+        // If so, we have to wait to update the sprite's properties
         if (_sprite == null)
         {
+            // Allows us to wait until the node's _rReady() callback ended
             CallDeferred(nameof(UpdateSpriteTexture));
         }
         else
