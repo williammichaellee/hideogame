@@ -17,7 +17,7 @@ public partial class Unit : Path2D
     public delegate void WalkFinishedEventHandler();
 
     // Preloads 'grass.tres' resource
-    [Export] public Grass Grid { get; set; } = GD.Load<Grass>("res://Grass.tres");
+    [Export] public Resource Grid { get; set; } = GD.Load<Resource>("res://Grass.tres");
     // Texture representing the unit, can be reassigned instantly in inspector
     [Export] public Texture Skin { get => _skin; set => SetSkin(value); }
     // Distance to which the unit can walk to in cells
@@ -67,8 +67,8 @@ public partial class Unit : Path2D
         SetProcess(false);
 
         // Initializes the 'cell' property and snap the unit to the cell's center on the map
-        Cell = Grid.CalculateGridCoordinates(Position);
-        Position = Grid.CalculateMapPosition(Cell);
+        Cell = ((dynamic)Grid).CalculateGridCoordinates(Position);
+        Position = ((dynamic)Grid).CalculateMapPosition(Cell);
 
         if (!Engine.IsEditorHint())
         {

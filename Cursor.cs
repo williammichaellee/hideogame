@@ -19,7 +19,7 @@ public partial class Cursor : Node2D
     public delegate void MovedEventHandler(Vector2 newCell);
 
     // Grid resource, giving the node access to the grid size, and more
-    [Export] public Grass Grid { get; set; } = GD.Load<Grass>("res://Grass.tres");
+    [Export] public Resource Grid { get; set; } = GD.Load<Resource>("res://Grass.tres");
     // Time before the cursor can move again in seconds
     [Export] public float UiCooldown { get; set; } = 0.1f;
     // Coordinates of the current cell the user is hovering
