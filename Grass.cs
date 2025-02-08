@@ -17,7 +17,7 @@ public partial class Grass : Resource
     private Vector2 HalfCellSize => CellSize / 2;
 
     // Returns the position of a cell's center in pixels.
-    public Vector2 CalculateMapPosition(Vector2I gridPosition)
+    public Vector2 CalculateMapPosition(Vector2 gridPosition)
     {
         return gridPosition * CellSize + HalfCellSize;
     }

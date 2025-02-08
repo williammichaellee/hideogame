@@ -140,7 +140,12 @@ public partial class Unit : Path2D
     // When changing the cell's value, we don't want coords out of the grid, so we clamp them
     private void SetCell(Vector2I value)
     {
-        _cell = ((dynamic)Grid).Clamp(value);
+        Vector2 vec = new Vector2(value.X, value.Y);
+        Vector2 clampedvec = ((dynamic)Grid).Clamp(value);
+        _cell = new Vector2I(
+            Mathf.RoundToInt(clampedvec.X), 
+            Mathf.RoundToInt(clampedvec.Y)
+        );
     }
 
     // The _isSelected property toggles playback of the "selected" animation
