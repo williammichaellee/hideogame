@@ -10,22 +10,22 @@ public partial class Grass : Resource
 
     // The size of a cell in pixels.
     [Export]
-    public Vector2 CellSize = new Vector2(80, 80);
+    public Vector2 CellSize = new Vector2(32, 32);
 
     // Half of `CellSize`.
     // Used to calculate the center of a grid cell in pixels on the screen.
     private Vector2 HalfCellSize => CellSize / 2;
 
     // Returns the position of a cell's center in pixels.
-    public Vector2 CalculateMapPosition(Vector2 gridPosition)
+    public Vector2 CalculateMapPosition(Vector2I gridPosition)
     {
         return gridPosition * CellSize + HalfCellSize;
     }
 
     // Returns the coordinates of the cell on the grid given a position on the map.
-    public Vector2 CalculateGridCoordinates(Vector2 mapPosition)
+    public Vector2I CalculateGridCoordinates(Vector2 mapPosition)
     {
-        return (mapPosition / CellSize).Floor();
+        return (Vector2I)((mapPosition / CellSize).Floor());
     }
 
     // Returns true if the `cellCoordinates` are within the grid.

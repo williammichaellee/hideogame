@@ -61,6 +61,7 @@ _data = {
 }
 
 [node name="Unit" type="Path2D" node_paths=PackedStringArray("_sprite", "_animPlayer", "_pathFollow")]
+position = Vector2(16, 16)
 scale = Vector2(2, 2)
 script = ExtResource("1_fagbv")
 _sprite = NodePath("PathFollow2D/Sprite")
@@ -72,6 +73,7 @@ rotates = false
 loop = false
 
 [node name="Sprite" type="Sprite2D" parent="PathFollow2D"]
+z_index = 1
 texture_filter = 1
 texture = ExtResource("3_7rtpx")
 hframes = 4
@@ -79,9 +81,9 @@ vframes = 5
 frame = 1
 
 [node name="Shadow" type="Sprite2D" parent="PathFollow2D"]
-visible = false
 modulate = Color(0.187176, 0.187176, 0.187176, 1)
 self_modulate = Color(0.344076, 0.344076, 0.344076, 1)
+position = Vector2(0, 7)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_5diom")
 

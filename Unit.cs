@@ -31,8 +31,8 @@ public partial class Unit : Path2D
     [Export] private PathFollow2D _pathFollow;
 
     // Coordinates of the grid's cell the unit is on.
-    private Vector2 _cell = Vector2.Zero;
-    public Vector2 Cell
+    private Vector2I _cell = Vector2I.Zero;
+    public Vector2I Cell
     {
         get => _cell;
         set => SetCell(value);
@@ -83,7 +83,7 @@ public partial class Unit : Path2D
 		new Vector2(8, 5),
 		new Vector2(8, 7)
         };
-        WalkAlong(_points);
+        //WalkAlong(_points);
     }
 
     // When 'active,' moves the unit along its 'curve' with the help of the PathFollow2D node
@@ -114,7 +114,7 @@ public partial class Unit : Path2D
 
     // Starts walking along the 'path'
     // 'path' is an array of grid coordinates that the function converts to map coordinates
-    public void WalkAlong(Vector2[] path)
+    public void WalkAlong(Vector2I[] path)
     {
         if (path.Length == 0)
         {
@@ -123,8 +123,8 @@ public partial class Unit : Path2D
 
         // Converts the 'path' to points on the 'curve'
         // Property comes from the Path2D class the Unit extends
-        Curve.AddPoint(Vector2.Zero);
-        foreach (Vector2 point in path)
+        Curve.AddPoint(Vector2I.Zero);
+        foreach (Vector2I point in path)
         {
             Curve.AddPoint(((dynamic)Grid).CalculateMapPosition(point) - Position);
         }
@@ -138,7 +138,7 @@ public partial class Unit : Path2D
     }
 
     // When changing the cell's value, we don't want coords out of the grid, so we clamp them
-    private void SetCell(Vector2 value)
+    private void SetCell(Vector2I value)
     {
         _cell = ((dynamic)Grid).Clamp(value);
     }

@@ -2,7 +2,6 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 
 public partial class UnitPath : TileMapLayer
 {
@@ -10,11 +9,11 @@ public partial class UnitPath : TileMapLayer
     [Export]
     public Grass Grid { get; set; }
 
+    // The current path being drawn as a packed array of Vector2 coordinates.
+    public Array<Vector2I> CurrentPath = new Array<Vector2I>();
+
     // PathFinder instance for finding paths.
     private PathFinder _pathfinder;
-
-    // The current path being drawn as a packed array of Vector2 coordinates.
-    private Array<Vector2I> _currentPath = new Array<Vector2I>();
 
     public override void _Ready() {
         // These two points define the start and end of a rectangle of cells.
@@ -23,14 +22,14 @@ public partial class UnitPath : TileMapLayer
 
         // The following lines generate a list of points filling the rectangle 
         // from rectStart to rectEnd.
-        var points = new List<Vector2>();
+        var points = new List<Vector2I>();
 
         // In a for loop, range-based iteration can be done with a standard range loop.
         for (int x = 0; x <= rectEnd.X - rectStart.X; x++)
         {
             for (int y = 0; y <= rectEnd.Y - rectStart.Y; y++)
             {
-                points.Add(rectStart + new Vector2(x, y));
+                points.Add(rectStart + new Vector2I(x, y));
             }
         }
 
@@ -44,7 +43,7 @@ public partial class UnitPath : TileMapLayer
     /// between two cells among the `walkableCells`.
     /// </summary>
     /// <param name="walkableCells">The list of walkable cells on the grid.</param>
-    public void Initialize(ICollection<Vector2> walkableCells)
+    public void Initialize(ICollection<Vector2I> walkableCells)
     {
         _pathfinder = new PathFinder(Grid, walkableCells);
     }
@@ -58,8 +57,8 @@ public partial class UnitPath : TileMapLayer
     {
         base._Draw();
         Clear(); // Clears the current tiles.
-        _currentPath = _pathfinder.CalculatePointPath(cellStart, cellEnd);
-        SetCellsTerrainConnect(_currentPath, 0, 0, false);
+        CurrentPath = _pathfinder.CalculatePointPath(cellStart, cellEnd);
+        SetCellsTerrainConnect(CurrentPath, 0, 0, false);
     }
 
     /// <summary>
