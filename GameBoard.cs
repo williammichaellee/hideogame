@@ -79,7 +79,7 @@ public partial class GameBoard : Node2D
         var stack = new Stack<Vector2I>();
         stack.Push(cell);
 
-        while (stack.Count > 0)
+        while (stack.Count != 0)
         {
             var current = stack.Pop();
 

@@ -77,13 +77,13 @@ public partial class Unit : Path2D
             Curve = new Curve2D();
         }
         // Temp instructions for moving the unit
-        Vector2[] _points = {
-		new Vector2(2, 2),
-		new Vector2(2, 5),
-		new Vector2(8, 5),
-		new Vector2(8, 7)
+        Vector2I[] _points = {
+		new(2, 2),
+		new(2, 5),
+		new(8, 5),
+		new(8, 7)
         };
-        //WalkAlong(_points);
+        WalkAlong(_points);
     }
 
     // When 'active,' moves the unit along its 'curve' with the help of the PathFollow2D node
