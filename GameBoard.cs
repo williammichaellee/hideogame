@@ -148,9 +148,20 @@ public partial class GameBoard : Node2D
         _walkableCells.Clear();
     }
 
+
+
+    public override void _Input(InputEvent @event)
+	{
+		// Mouse in viewport coordinates.
+		if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == MouseButton.Left) {
+
+        }
+    }
+
     // Handles cursor press: either selects or moves a unit
     private void OnCursorAcceptPressed(Vector2I cell)
     {
+        GD.Print($"OnCursorAcceptPressed {cell}");
         if (_activeUnit == null)
         {
             SelectUnit(cell);
@@ -162,7 +173,7 @@ public partial class GameBoard : Node2D
     }
 
     // Updates the interactive path drawing if there's an active and selected unit
-    private void OnCursorMoved(Vector2 newCell)
+    private void OnCursorMoved(Vector2I newCell)
     {
         if (_activeUnit != null && _activeUnit.IsSelected)
         {

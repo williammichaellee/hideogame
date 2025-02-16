@@ -37,20 +37,12 @@ z_index = 1
 
 [node name="Unit" parent="GameBoard" instance=ExtResource("4_dtmex")]
 position = Vector2(80, 48)
-Cell = Vector2(2, 1)
-IsSelected = false
-IsWalking = false
-_cell = Vector2(2, 1)
-_isSelected = false
-_isWalking = false
-_skin = null
-_skinOffset = Vector2(0, 0)
 
-[node name="Cursor" parent="GameBoard" node_paths=PackedStringArray("_timer") instance=ExtResource("6_hwsw5")]
-Cell = Vector2(0, 0)
-_cell = Vector2(0, 0)
-_timer = NodePath("Timer")
+[node name="Cursor" parent="GameBoard" instance=ExtResource("6_hwsw5")]
 
 [node name="CursorSprite" type="Sprite2D" parent="."]
 position = Vector2(-16, -16)
 texture = ExtResource("3_r8a4d")
+
+[connection signal="AcceptPressed" from="GameBoard/Cursor" to="GameBoard" method="OnCursorAcceptPressed"]
+[connection signal="Moved" from="GameBoard/Cursor" to="GameBoard" method="OnCursorMoved"]

@@ -13,18 +13,18 @@ public partial class Cursor : Node2D
 
     // Signal emitted when the user interacts with the currently hovered cell
     [Signal]
-    public delegate void AcceptPressedEventHandler(Vector2 cell);
+    public delegate void AcceptPressedEventHandler(Vector2I cell);
     // Emitted when the cursor moved to a new cell
     [Signal]
-    public delegate void MovedEventHandler(Vector2 newCell);
+    public delegate void MovedEventHandler(Vector2I newCell);
 
     // Grid resource, giving the node access to the grid size, and more
     [Export] public Resource Grid { get; set; } = GD.Load<Resource>("res://Grass.tres");
     // Time before the cursor can move again in seconds
     [Export] public float UiCooldown { get; set; } = 0.1f;
     // Coordinates of the current cell the user is hovering
-    private Vector2 _cell = Vector2.Zero;
-    public Vector2 Cell
+    private Vector2I _cell = Vector2I.Zero;
+    public Vector2I Cell
     {
         get => _cell;
         set => SetCell(value);
@@ -79,19 +79,19 @@ public partial class Cursor : Node2D
         // See SetCell function below to see what changes that triggers
         if (@event.IsAction("ui_right"))
         {
-            Cell += Vector2.Right;
+            Cell += Vector2I.Right;
         }
         else if (@event.IsAction("ui_up"))
         {
-            Cell += Vector2.Up;
+            Cell += Vector2I.Up;
         }
         else if (@event.IsAction("ui_left"))
         {
-            Cell += Vector2.Left;
+            Cell += Vector2I.Left;
         }
         else if (@event.IsAction("ui_down"))
         {
-            Cell += Vector2.Down;
+            Cell += Vector2I.Down;
         }
     }
 
@@ -103,11 +103,11 @@ public partial class Cursor : Node2D
     }
 
     // This function controls the cursor's current position
-    private void SetCell(Vector2 value)
+    private void SetCell(Vector2I value)
     {
         // We first clamp the cell coordinates and ensure that we weren't trying to move outside grid boundaries
-        Vector2 newCell = ((dynamic)Grid).Clamp(value);
-        if (newCell.IsEqualApprox(Cell))
+        Vector2I newCell = ((dynamic)Grid).Clamp(value);
+        if (newCell.Equals(Cell))
         {
             return;
         }

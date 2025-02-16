@@ -37,11 +37,11 @@ public partial class Grass : Resource
     }
 
     // Makes the `gridPosition` fit within the grid's bounds.
-    public Vector2 Clamp(Vector2 gridPosition)
+    public Vector2I Clamp(Vector2I gridPosition)
     {
-        return new Vector2(
-            Mathf.Clamp(gridPosition.X, 0, Size.X - 1),
-            Mathf.Clamp(gridPosition.Y, 0, Size.Y - 1)
+        return new Vector2I(
+            (int)Math.Clamp(gridPosition.X, 0, Size.X - 1),
+            (int)Math.Clamp(gridPosition.Y, 0, Size.Y - 1)
         );
     }
 

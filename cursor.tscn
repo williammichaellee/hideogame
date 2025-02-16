@@ -2,12 +2,9 @@
 
 [ext_resource type="Script" path="res://Cursor.cs" id="1_wxw5l"]
 
-[node name="Cursor" type="Node2D" node_paths=PackedStringArray("_timer")]
+[node name="Cursor" type="Node2D"]
 position = Vector2(16, 16)
 script = ExtResource("1_wxw5l")
-Cell = Vector2(0, 0)
-_cell = Vector2(0, 0)
-_timer = NodePath("Timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
