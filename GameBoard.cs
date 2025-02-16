@@ -26,7 +26,6 @@ public partial class GameBoard : Node2D
         var asString = string.Join(System.Environment.NewLine, _units);
         foreach (var unit in _units)
             _unitOverlay.Draw(GetWalkableCells(unit.Value));
-        GD.Print("peant nits:", asString);
     }
 
     public override void _UnhandledInput(InputEvent @event)

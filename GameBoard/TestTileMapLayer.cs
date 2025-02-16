@@ -35,14 +35,14 @@ public partial class TestTileMapLayer : Node2D
 		return pixelCoords;
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		// Mouse in viewport coordinates.
-		if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == MouseButton.Left) {
-			GD.Print("Mouse Click at: ", eventMouseButton.Position);
-			var tileCoords = MousePositionToTilePosition(eventMouseButton);
-			GD.Print("Tile coordinate is: ", tileCoords);
-			cursorSprite.Position = TilePositionToPixelPosition(tileCoords);
-		}
-	}
+	// public override void _Input(InputEvent @event)
+	// {
+	// 	// Mouse in viewport coordinates.
+	// 	if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == MouseButton.Left) {
+	// 		GD.Print("Mouse Click at: ", eventMouseButton.Position);
+	// 		var tileCoords = MousePositionToTilePosition(eventMouseButton);
+	// 		GD.Print("Tile coordinate is: ", tileCoords);
+	// 		cursorSprite.Position = TilePositionToPixelPosition(tileCoords);
+	// 	}
+	// }
 }

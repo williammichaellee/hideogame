@@ -14,7 +14,6 @@ public partial class UnitOverlay : TileMapLayer
         foreach (Vector2I cell in cells)
         {
             SetCell(cell, 0, new Vector2I(0,0));
-            GD.Print("e ", cell);
         }
     }
 }
