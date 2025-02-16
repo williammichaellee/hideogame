@@ -28,6 +28,8 @@ script = ExtResource("5_kblrl")
 Grid = ExtResource("1_1p8am")
 
 [node name="UnitOverlay" parent="GameBoard" instance=ExtResource("4_t00gi")]
+y_sort_enabled = true
+y_sort_origin = 1
 
 [node name="UnitPath" parent="GameBoard" instance=ExtResource("7_8wx2r")]
 z_index = 1

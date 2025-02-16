@@ -8,7 +8,7 @@ public partial class GameBoard : Node2D
      private static readonly Vector2I[] DIRECTIONS = { Vector2I.Left, Vector2I.Right, Vector2I.Up, Vector2I.Down };
 
     // Resource of type Grid
-    [Export] public Resource Grid { get; set; }
+    [Export] public Grass Grid { get; set; }
 
     // Mapping of cell coordinates to the units they contain
     private Dictionary<Vector2I, Unit> _units = new();
@@ -83,7 +83,7 @@ public partial class GameBoard : Node2D
         {
             var current = stack.Pop();
 
-            if (!Grid.Call("IsWithinBounds", current).As<bool>()) continue;
+            if (!Grid.IsWithinBounds(current)) continue;
             if (result.Contains(current)) continue;
 
             var difference = (current - cell).Abs();
