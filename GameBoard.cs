@@ -115,7 +115,7 @@ public partial class GameBoard : Node2D
 
         DeselectActiveUnit();
         _activeUnit.WalkAlong(_unitPath.CurrentPath.Select(v => new Vector2I(v.X, v.Y)).ToArray());
-        await ToSignal(_activeUnit, "walk_finished");
+        await ToSignal(_activeUnit, "WalkFinished");
         ClearActiveUnit();
     }
 
