@@ -13,7 +13,7 @@ public partial class UnitOverlay : TileMapLayer
         Clear();
         foreach (Vector2I cell in cells)
         {
-            SetCell(cell, 0);
+            SetCell(cell, 0, new Vector2I(0,0));
             GD.Print("e ", cell);
         }
     }

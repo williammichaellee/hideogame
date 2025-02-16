@@ -21,7 +21,7 @@ public partial class Unit : Path2D
     // Texture representing the unit, can be reassigned instantly in inspector
     [Export] public Texture Skin { get => _skin; set => SetSkin(value); }
     // Distance to which the unit can walk to in cells
-    [Export] public int MoveRange { get; set; } = 6;
+    [Export] public int MoveRange { get; set; } = 2;
     // Offsets skin so that its sprite aligns with its shadow
     [Export] public Vector2 SkinOffset { get => _skinOffset; set => SetSkinOffset(value); }
     // Unit's move speed in pixels
@@ -77,13 +77,13 @@ public partial class Unit : Path2D
             Curve = new Curve2D();
         }
         // Temp instructions for moving the unit
-        Vector2I[] _points = {
-		new(2, 2),
-		new(2, 5),
-		new(8, 5),
-		new(8, 7)
-        };
-        WalkAlong(_points);
+        // Vector2I[] _points = {
+		// new(2, 2),
+		// new(2, 5),
+		// new(8, 5),
+		// new(8, 7)
+        // };
+        // WalkAlong(_points);
     }
 
     // When 'active,' moves the unit along its 'curve' with the help of the PathFollow2D node

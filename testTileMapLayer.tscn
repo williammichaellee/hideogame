@@ -28,6 +28,7 @@ script = ExtResource("5_kblrl")
 Grid = ExtResource("1_1p8am")
 
 [node name="UnitOverlay" parent="GameBoard" instance=ExtResource("4_t00gi")]
+modulate = Color(1, 1, 1, 0.392157)
 y_sort_enabled = true
 y_sort_origin = 1
 
@@ -36,8 +37,19 @@ z_index = 1
 
 [node name="Unit" parent="GameBoard" instance=ExtResource("4_dtmex")]
 position = Vector2(80, 48)
+Cell = Vector2(2, 1)
+IsSelected = false
+IsWalking = false
+_cell = Vector2(2, 1)
+_isSelected = false
+_isWalking = false
+_skin = null
+_skinOffset = Vector2(0, 0)
 
-[node name="Cursor" parent="GameBoard" instance=ExtResource("6_hwsw5")]
+[node name="Cursor" parent="GameBoard" node_paths=PackedStringArray("_timer") instance=ExtResource("6_hwsw5")]
+Cell = Vector2(0, 0)
+_cell = Vector2(0, 0)
+_timer = NodePath("Timer")
 
 [node name="CursorSprite" type="Sprite2D" parent="."]
 position = Vector2(-16, -16)
