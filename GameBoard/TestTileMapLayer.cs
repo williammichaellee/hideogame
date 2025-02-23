@@ -39,9 +39,9 @@ public partial class TestTileMapLayer : Node2D
 	{
 		// Mouse in viewport coordinates.
 		if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == MouseButton.Left) {
-			GD.Print("Mouse Click at: ", eventMouseButton.Position);
+			// GD.Print("Mouse Click at: ", eventMouseButton.Position);
 			var tileCoords = MousePositionToTilePosition(eventMouseButton);
-			GD.Print("Tile coordinate is: ", tileCoords);
+			// GD.Print("Tile coordinate is: ", tileCoords);
 			cursorSprite.Position = TilePositionToPixelPosition(tileCoords);
 		}
 	}

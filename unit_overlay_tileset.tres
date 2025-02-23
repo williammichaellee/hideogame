@@ -1,0 +1,12 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bbgbgld4evt3k"]
+
+[ext_resource type="Texture2D" uid="uid://dc7dacdfkvt7e" path="res://tileset_unit_overlay.svg" id="1_btneu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gvut2"]
+texture = ExtResource("1_btneu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_gvut2")
