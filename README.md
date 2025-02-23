@@ -1,2 +1,2 @@
 # hideogame
-demo project for independent hideo game
+DO NOT CREATE BRANCHES OFF OF ANY OTHER BRANCH BESIDES MAIN
