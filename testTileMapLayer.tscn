@@ -37,6 +37,7 @@ z_index = 1
 
 [node name="Unit" parent="GameBoard" instance=ExtResource("4_dtmex")]
 position = Vector2(80, 48)
+scale = Vector2(1, 1)
 MoveRange = 8
 
 [node name="Cursor" parent="GameBoard" instance=ExtResource("6_hwsw5")]
