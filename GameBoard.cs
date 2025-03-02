@@ -96,7 +96,7 @@ public partial class GameBoard : Node2D
 			if (dist > maxDistance) continue;
 
 			var tileMapCell = _baseTileMapLayer.GetCellTileData(coords);
-			
+			if (tileMapCell == null) continue;
 			if (!(bool)tileMapCell.GetCustomData("walkable")) continue;
 
 			result.Add(coords);
