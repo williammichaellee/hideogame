@@ -75,7 +75,6 @@ loop = false
 [node name="Sprite" type="Sprite2D" parent="PathFollow2D"]
 z_index = 1
 texture_filter = 1
-scale = Vector2(2, 2)
 texture = ExtResource("3_7rtpx")
 hframes = 4
 vframes = 5
