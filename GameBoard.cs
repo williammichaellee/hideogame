@@ -28,6 +28,10 @@ public partial class GameBoard : Node2D
 		var asString = string.Join(System.Environment.NewLine, _units);
 		foreach (var unit in _units)
 			_unitOverlay.Draw(GetWalkableCells(unit.Value));
+		
+		var cursor = GetNode<Cursor>("Cursor");
+		cursor.AcceptPressed += OnCursorAcceptPressed;
+		cursor.Moved += OnCursorMoved;
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -77,21 +81,22 @@ public partial class GameBoard : Node2D
 	private List<Vector2I> FloodFillWalking(Vector2I cell, int maxDistance)
 	{
 		var result = new List<Vector2I>();
-		var cellStack = new Stack<Vector2I>();
-		var distStack = new Stack<int>();
-		cellStack.Push(cell);
-		distStack.Push(0);
+		var cellQueue = new Queue<Vector2I>();
+		var distQueue = new Queue<int>();
+		cellQueue.Enqueue(cell);
+		distQueue.Enqueue(0);
 
-		while (cellStack.Count != 0)
+		while (cellQueue.Count != 0)
 		{
-			Vector2I coords = cellStack.Pop();
-			int dist = distStack.Pop();
+			Vector2I coords = cellQueue.Dequeue();
+			int dist = distQueue.Dequeue();
 
 			if (!Grid.IsWithinBounds(coords)) continue;
 			if (result.Contains(coords)) continue;
 			if (dist > maxDistance) continue;
 
 			var tileMapCell = _baseTileMapLayer.GetCellTileData(coords);
+			
 			if (!(bool)tileMapCell.GetCustomData("walkable")) continue;
 
 			result.Add(coords);
@@ -100,11 +105,11 @@ public partial class GameBoard : Node2D
 			{
 				var neighbor = coords + direction;
 
-				if (IsOccupied(neighbor) || result.Contains(neighbor) || cellStack.Contains(neighbor))
+				if (IsOccupied(neighbor) || result.Contains(neighbor) || cellQueue.Contains(neighbor))
 					continue;
 
-				cellStack.Push(neighbor);
-				distStack.Push(dist + 1);
+				cellQueue.Enqueue(neighbor);
+				distQueue.Enqueue(dist + 1);
 			}
 		}
 
@@ -166,7 +171,7 @@ public partial class GameBoard : Node2D
 	// Handles cursor press: either selects or moves a unit
 	private void OnCursorAcceptPressed(Vector2I cell)
 	{
-		GD.Print($"OnCursorAcceptPressed {cell}");
+		// GD.Print($"OnCursorAcceptPressed {cell}");
 		if (_activeUnit == null)
 		{
 			SelectUnit(cell);
