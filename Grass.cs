@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [Tool]
-public partial class Grass : Resource
+public partial class Grass : TileSet
 {
     // The grid's size in rows and columns.
     [Export]
