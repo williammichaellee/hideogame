@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://brrnn1holu3kg"]
+[gd_scene load_steps=8 format=3 uid="uid://bgugn6q6elhcf"]
 
 [ext_resource type="Texture2D" uid="uid://7e18jv8f4y0r" path="res://Units/unit_shadow.svg" id="1_5diom"]
 [ext_resource type="Script" path="res://Unit.cs" id="1_fagbv"]
-[ext_resource type="Texture2D" uid="uid://dmyoieiq2b85d" path="res://HAS_Creatures/great elf/dwarf/sprite_sheet_dwarf_0_16x16.png" id="3_7rtpx"]
+[ext_resource type="Texture2D" uid="uid://bowuuxwtqdle1" path="res://HAS_Creatures/great elf/hunter/sprite_sheet_hunter_0_16x16.png" id="2_j52pg"]
 
 [sub_resource type="Animation" id="Animation_jt5y5"]
 length = 0.001
@@ -64,17 +64,9 @@ _data = {
 position = Vector2(16, 16)
 scale = Vector2(2, 2)
 script = ExtResource("1_fagbv")
-Cell = Vector2i(0, 0)
-IsSelected = false
-IsWalking = false
 _sprite = NodePath("PathFollow2D/Sprite")
 _animPlayer = NodePath("AnimationPlayer")
 _pathFollow = NodePath("PathFollow2D")
-_cell = Vector2i(0, 0)
-_isSelected = false
-_isWalking = false
-_skin = null
-_skinOffset = Vector2(0, 0)
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
@@ -84,7 +76,7 @@ loop = false
 z_index = 1
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("3_7rtpx")
+texture = ExtResource("2_j52pg")
 hframes = 4
 vframes = 5
 frame = 1
