@@ -105,7 +105,7 @@ public partial class GameBoard : Node2D
 			{
 				var neighbor = coords + direction;
 
-				if (IsOccupied(neighbor) || result.Contains(neighbor) || cellQueue.Contains(neighbor))
+				if (result.Contains(neighbor) || cellQueue.Contains(neighbor))
 					continue;
 
 				cellQueue.Enqueue(neighbor);
