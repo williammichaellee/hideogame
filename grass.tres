@@ -1764,13 +1764,9 @@ texture = ExtResource("3_hcfe4")
 [resource]
 custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
-custom_data_layer_1/name = "occupied"
-custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_b0hjg")
 sources/1 = SubResource("TileSetAtlasSource_0eho3")
 sources/2 = SubResource("TileSetAtlasSource_0bdbi")
 script = ExtResource("1_jk5a7")
 Size = Vector2(20, 20)
 CellSize = Vector2(32, 32)
-custom_data_layer_1/name = "occupied"
-custom_data_layer_1/type = 1
