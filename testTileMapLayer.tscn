@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://047nidfen6p"]
+[gd_scene load_steps=11 format=4 uid="uid://047nidfen6p"]
 
 [ext_resource type="TileSet" uid="uid://wqerc5nuvpyy" path="res://Grass.tres" id="1_1p8am"]
 [ext_resource type="Script" path="res://GameBoard/TestTileMapLayer.cs" id="2_3pstw"]
@@ -9,12 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://bgbpr4jitxmau" path="res://cursor.tscn" id="6_hwsw5"]
 [ext_resource type="PackedScene" uid="uid://bgugn6q6elhcf" path="res://unit0.tscn" id="7_4bj7j"]
 [ext_resource type="PackedScene" uid="uid://dlcfiy85ye1sm" path="res://unitpath.tscn" id="7_8wx2r"]
+[ext_resource type="PackedScene" uid="uid://c5qast2sfleib" path="res://pause.tscn" id="9_qwa3l"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
 script = ExtResource("2_3pstw")
 
 [node name="GameBoard" type="Node2D" parent="."]
+process_mode = 1
+z_index = -1
 y_sort_enabled = true
 script = ExtResource("5_kblrl")
 Grid = ExtResource("1_1p8am")
@@ -53,3 +56,12 @@ tile_set = ExtResource("1_1p8am")
 [node name="CursorSprite" type="Sprite2D" parent="."]
 position = Vector2(-16, -16)
 texture = ExtResource("3_r8a4d")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 544.0
+offset_bottom = 384.0
+
+[node name="Pause" parent="UI" instance=ExtResource("9_qwa3l")]
+layout_mode = 1
