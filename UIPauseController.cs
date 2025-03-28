@@ -2,20 +2,22 @@ using Godot;
 using System;
 
 public partial class UIPauseController : Control {
-	private Control pauseMenu;
+	private bool paused = false;
 	
-	private void Ready () {
-		pauseMenu = GetNode<Control>( "Pause" );
-		pauseMenu.visible = false;
+	public override void _Ready () {
+		Hide();
 	}
 	
-	private void Pause () {
-		// this pauses the game
-		GetTree().Paused = true;
-		pauseMenu.visible = true;
+	public void TogglePause () {
+		paused = !paused;
+		GetTree().Paused = paused;
+		if ( paused )
+			Show();
+		else
+			Hide();
 	}
 	
-	private void Quit () {
-		
+	public void OnExitBtnPressed () {
+		GetTree().Quit();
 	}
 }
