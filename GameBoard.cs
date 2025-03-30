@@ -176,6 +176,13 @@ public partial class GameBoard : Node2D
 		{
 			SelectUnit(cell);
 		}
+		// If you click on the cell again, go through the deselect process the same as if "ui_cancel" is pressed
+		// GetValueOrDefault is there to prevent key errors when cell does not have a unit on it
+		// (and therefore does not have a corresponding value in the _units dictionary)
+		else if (_units.GetValueOrDefault(cell) == _activeUnit) {
+			DeselectActiveUnit();
+			ClearActiveUnit();
+		}
 		else if (_activeUnit.IsSelected)
 		{
 			MoveActiveUnit(cell);
