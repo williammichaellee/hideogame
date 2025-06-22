@@ -1,12 +1,22 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bbgbgld4evt3k"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bbgbgld4evt3k"]
 
 [ext_resource type="Texture2D" uid="uid://dc7dacdfkvt7e" path="res://tileset_unit_overlay.svg" id="1_btneu"]
+[ext_resource type="Texture2D" uid="uid://eoa2sf7bt06b" path="res://tileset_ally_overlay.png" id="2_i27en"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gvut2"]
 texture = ExtResource("1_btneu")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehx14"]
+texture = ExtResource("2_i27en")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_gvut2")
+sources/1 = SubResource("TileSetAtlasSource_ehx14")

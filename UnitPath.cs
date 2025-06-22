@@ -32,10 +32,6 @@ public partial class UnitPath : TileMapLayer
                 points.Add(rectStart + new Vector2I(x, y));
             }
         }
-
-        // Use the points to initialize the PathFinder and draw a path.
-        Initialize(points);
-        Draw(rectStart, new Vector2I(8, 7));
     }
 
     /// <summary>

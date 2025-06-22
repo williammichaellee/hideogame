@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 public partial class UnitOverlay : TileMapLayer
 {
@@ -8,12 +10,23 @@ public partial class UnitOverlay : TileMapLayer
     /// Fills the tilemap with the given cells, visually representing where a unit can walk.
     /// </summary>
     /// <param name="cells">A list of walkable cell positions.</param>
-    public void Draw(IEnumerable<Vector2I> cells)
+    public void Draw(IEnumerable<Vector2I> cells, IEnumerable<Vector2I> allies)
     {
         Clear();
-        foreach (Vector2I cell in cells)
+        var cellsEnum = cells.GetEnumerator();
+        var alliesEnum = allies.GetEnumerator();
+        // Represents where a unit can walk
+        while (cellsEnum.MoveNext())
         {
-            SetCell(cell, 0, new Vector2I(0,0));
+            SetCell(cellsEnum.Current, 0, new Vector2I(0, 0));
+        }
+        // Represents tiles occupied by allied units
+        while (alliesEnum.MoveNext())
+        {
+            if (cells.Contains(alliesEnum.Current))
+            {
+                SetCell(alliesEnum.Current, 1, new Vector2I(0, 0));
+            }
         }
     }
 }
