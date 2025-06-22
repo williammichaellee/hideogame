@@ -26,8 +26,6 @@ public partial class GameBoard : Node2D
 		_baseTileMapLayer = GetNode<TileMapLayer>("BaseTileMap");
 		Reinitialize();
 		var asString = string.Join(System.Environment.NewLine, _units);
-		foreach (var unit in _units)
-			_unitOverlay.Draw(GetWalkableCells(unit.Value));
 		
 		var cursor = GetNode<Cursor>("Cursor");
 		cursor.AcceptPressed += OnCursorAcceptPressed;
@@ -139,7 +137,7 @@ public partial class GameBoard : Node2D
 		_activeUnit.IsSelected = true;
 		_walkableCells = GetWalkableCells(_activeUnit);
 
-		_unitOverlay.Draw(_walkableCells.Select(v => new Vector2I((int)v.X, (int)v.Y)).ToList());
+		_unitOverlay.Draw(_walkableCells, _units.Keys);
 		_unitPath.Initialize(_walkableCells);
 	}
 
@@ -157,8 +155,6 @@ public partial class GameBoard : Node2D
 		_activeUnit = null;
 		_walkableCells.Clear();
 	}
-
-
 
 	public override void _Input(InputEvent @event)
 	{

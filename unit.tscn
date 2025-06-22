@@ -64,9 +64,17 @@ _data = {
 position = Vector2(16, 16)
 scale = Vector2(2, 2)
 script = ExtResource("1_fagbv")
+Cell = Vector2i(0, 0)
+IsSelected = false
+IsWalking = false
 _sprite = NodePath("PathFollow2D/Sprite")
 _animPlayer = NodePath("AnimationPlayer")
 _pathFollow = NodePath("PathFollow2D")
+_cell = Vector2i(0, 0)
+_isSelected = false
+_isWalking = false
+_skin = null
+_skinOffset = Vector2(0, 0)
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
